@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PR Intelligence Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; background: #f9f9f9; }
+    h1 { color: #2c3e50; }
+    .section { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #eee; margin-bottom: 2em; padding: 1.5em; }
+    .risk-high { color: #e74c3c; font-weight: bold; }
+    .risk-medium { color: #f39c12; font-weight: bold; }
+    .risk-low { color: #27ae60; font-weight: bold; }
+    ul { margin: 0.5em 0 0 1.5em; }
+    pre { background: #f4f4f4; padding: 1em; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h1>PR Intelligence Dashboard</h1>
+
+  <div class="section">
+    <h2>Impacted Modules</h2>
+    <ul id="impacted-modules"></ul>
+  </div>
+
+  <div class="section">
+    <h2>Risk Level</h2>
+    <span id="risk-level" class="risk-low">Loading...</span>
+  </div>
+
+  <div class="section">
+    <h2>Test Cases</h2>
+    <ul id="test-cases"></ul>
+  </div>
+
+  <div class="section">
+    <h2>PR Summary</h2>
+    <pre id="pr-summary"></pre>
+  </div>
+
+  <script>
+    // Example: Replace this with actual data loading logic
+    const data = {
+      impact_report: { impacted_components: ["moduleA", "moduleB"] },
+      risk_assessment: { risk_level: "medium" },
+      test_suggestions: { test_suggestions: [
+        { type: "unit", file: "moduleA/file1.py", function: "foo" },
+        { type: "edge_case", file: "moduleB/file2.py", function: "bar" }
+      ] },
+      pr_summary: { summary: "This PR modifies 2 files across 2 components. Risk level: medium.", description: "Key changes impact the following components: moduleA, moduleB.", key_changes: [] }
+    };
+
+    // Impacted Modules
+    const modulesList = document.getElementById('impacted-modules');
+    data.impact_report.impacted_components.forEach(m => {
+      const li = document.createElement('li');
+      li.textContent = m;
+      modulesList.appendChild(li);
+    });
+
+    // Risk Level
+    const riskSpan = document.getElementById('risk-level');
+    const risk = data.risk_assessment.risk_level;
+    riskSpan.textContent = risk.charAt(0).toUpperCase() + risk.slice(1);
+    riskSpan.className = 'risk-' + risk;
+
+    // Test Cases
+    const testList = document.getElementById('test-cases');
+    data.test_suggestions.test_suggestions.forEach(t => {
+      const li = document.createElement('li');
+      li.textContent = `${t.type} - ${t.file} - ${t.function}`;
+      testList.appendChild(li);
+    });
+
+    // PR Summary
+    document.getElementById('pr-summary').textContent = data.pr_summary.summary + "\n" + data.pr_summary.description;
+  </script>
+</body>
+</html>
