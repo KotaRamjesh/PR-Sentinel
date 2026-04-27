@@ -1,0 +1,63 @@
++-------------------------+
+|   Developer (VS Code)   |
++-----------+-------------+
+            |
+            v
++-----------------------------+
+| PR Sentinel VS Code Extension|
+| - Detect git changes        |
+| - Trigger analysis          |
++-------------+---------------+
+              |
+              v
++-----------------------------+
+|        plan.md Loader       |
+| - Read objectives           |
+| - Parse skills              |
+| - Load decision rules       |
++-------------+---------------+
+              |
+              v
++-----------------------------+
+|     Skill Orchestrator      |
+| - Map skills → executors    |
+| - Manage execution flow     |
++------+------+---------------+
+       |      | 
+       |      | (Parallel Execution)
+       v      v
++-----------+   +------------------+
+| Code      |   | Security         |
+| Review    |   | Scan             |
+| Skill     |   | Skill            |
++-----------+   +------------------+
+       |              |
+       v              v
++-----------+   +------------------+
+| Impact    |   | Test Validation  |
+| Analysis  |   | Skill            |
+| Skill     |   +------------------+
++-----------+
+       |
+       v
++-----------------------------+
+|     Result Aggregator       |
+| - Collect all outputs       |
+| - Normalize results         |
++-------------+---------------+
+              |
+              v
++-----------------------------+
+|      Decision Engine        |
+| (Driven by plan.md rules)   |
+| - BLOCK / WARN / APPROVE    |
++------+------+---------------+
+       |      |
+       |      |
+       v      v
++-----------+   +----------------------+
+| Fix Engine|   | GitHub Integration   |
+| (Skills)  |   | - Create branch      |
+| - Auto fix|   | - Commit & push      |
++-----------+   | - Raise PR           |
+                +----------------------+
